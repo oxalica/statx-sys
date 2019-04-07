@@ -1,8 +1,14 @@
 [package]
 name = "statx-sys"
-version = "0.0.1"
+version = "0.1.0"
 authors = ["uHOOCCOOHu <hooccooh1896@gmail.com>"]
 edition = "2018"
+license = "MIT"
+categories = ["unix-apis", "external-ffi-bindings", "os"]
+keywords = ["statx", "linux", "ffi", "system"]
+repository = "https://github.com/uHOOCCOOHu/statx-sys"
+description = "Bindings to `statx` syscall."
+readme = "README.md"
 
 [dependencies]
 libc = "^0.2.51"
