@@ -1,10 +1,10 @@
 [package]
 name = "statx-sys"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["uHOOCCOOHu <hooccooh1896@gmail.com>"]
 edition = "2018"
 license = "MIT"
-categories = ["unix-apis", "external-ffi-bindings", "os"]
+categories = ["os::unix-apis", "external-ffi-bindings"]
 keywords = ["statx", "linux", "ffi", "system"]
 repository = "https://github.com/uHOOCCOOHu/statx-sys"
 description = "Bindings to `statx` syscall."
