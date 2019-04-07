@@ -6,7 +6,7 @@
 //! http://man7.org/linux/man-pages/man2/statx.2.html
 #![deny(warnings)]
 
-use libc::{__errno_location, syscall};
+use libc::syscall;
 use libc::{__s32, __u16, __u32, __u64, c_char, c_int, c_long, c_uint};
 
 /// Timestamp structure for the timestamps in struct statx.
@@ -158,11 +158,7 @@ pub unsafe fn statx(
     mask: c_uint,
     statxbuf: *mut statx,
 ) -> c_int {
-    if syscall(SYS_statx, dirfd, pathname, flags, mask, statxbuf) == 0 {
-        0
-    } else {
-        *__errno_location()
-    }
+    syscall(SYS_statx, dirfd, pathname, flags, mask, statxbuf) as c_int
 }
 
 #[cfg(test)]
@@ -188,7 +184,7 @@ mod tests {
     #[test]
     #[ignore]
     fn test_stat() {
-        use libc::{strerror, AT_FDCWD};
+        use libc::{__errno_location, strerror, AT_FDCWD};
         use std::cell::UnsafeCell;
         use std::mem::zeroed;
         use std::os::unix::ffi::OsStrExt;
@@ -203,8 +199,9 @@ mod tests {
         let buf = UnsafeCell::new(unsafe { zeroed::<statx>() });
         let ret = unsafe { statx(AT_FDCWD, c_path, 0, STATX_ALL, buf.get()) };
         if ret != 0 {
+            let errno = unsafe { *__errno_location() };
             let err_str: String = unsafe {
-                let pstr = strerror(ret);
+                let pstr = strerror(errno);
                 assert!(!pstr.is_null());
                 (0..)
                     .map(|i| *pstr.offset(i) as u8 as char)
