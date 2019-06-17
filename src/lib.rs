@@ -4,6 +4,7 @@
 //!
 //! # See also
 //! http://man7.org/linux/man-pages/man2/statx.2.html
+#![no_std]
 #![deny(warnings)]
 
 use libc::syscall;
@@ -168,7 +169,7 @@ mod tests {
     #[test]
     fn check_struct_layout() {
         use memoffset::offset_of;
-        use std::mem::size_of;
+        use core::mem::size_of;
 
         assert_eq!(size_of::<statx>(), 0x100);
         assert_eq!(size_of::<statx_timestamp>(), 16);
@@ -179,38 +180,5 @@ mod tests {
         assert_eq!(offset_of!(statx, stx_atime), 0x40);
         assert_eq!(offset_of!(statx, stx_rdev_major), 0x80);
         assert_eq!(offset_of!(statx, __spare2), 0x90);
-    }
-
-    #[test]
-    #[ignore]
-    fn test_stat() {
-        use libc::{__errno_location, strerror, AT_FDCWD};
-        use std::cell::UnsafeCell;
-        use std::mem::zeroed;
-        use std::os::unix::ffi::OsStrExt;
-        use std::path::Path;
-
-        const PATH: &str = "."; // Working dir.
-
-        let mut c_path_buf: Vec<u8> = Path::new(PATH).as_os_str().as_bytes().to_owned();
-        c_path_buf.push(0); // '\0'
-        let c_path = c_path_buf.as_ptr() as *mut c_char;
-
-        let buf = UnsafeCell::new(unsafe { zeroed::<statx>() });
-        let ret = unsafe { statx(AT_FDCWD, c_path, 0, STATX_ALL, buf.get()) };
-        if ret != 0 {
-            let errno = unsafe { *__errno_location() };
-            let err_str: String = unsafe {
-                let pstr = strerror(errno);
-                assert!(!pstr.is_null());
-                (0..)
-                    .map(|i| *pstr.offset(i) as u8 as char)
-                    .take_while(|c| *c != '\0')
-                    .collect()
-            };
-            panic!("statx() failed: {}", err_str);
-        } else {
-            println!("statx() success: {:?}", buf.into_inner());
-        }
     }
 }
