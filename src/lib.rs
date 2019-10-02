@@ -22,7 +22,7 @@ use libc::{__s32, __u16, __u32, __u64, c_char, c_int, c_long, c_uint};
 #[derive(Clone, Copy, Debug)]
 pub struct statx_timestamp {
     pub tv_sec: i64,
-    pub tc_nsec: __u32,
+    pub tv_nsec: __u32,
     pub __reserved: __s32,
 }
 
