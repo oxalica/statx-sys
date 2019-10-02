@@ -14,4 +14,4 @@ readme = "README.md"
 libc = { version = "^0.2.51", default-features = false }
 
 [dev-dependencies]
-memoffset = "^0.3.0"
+memoffset = "^0.5.1"
