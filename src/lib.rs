@@ -8,7 +8,7 @@
 #![deny(warnings)]
 
 use libc::syscall;
-use libc::{__s32, __u16, __u32, __u64, c_char, c_int, c_long, c_uint};
+use libc::{c_char, c_long, c_int, c_uint};
 
 /// Timestamp structure for the timestamps in struct statx.
 ///
@@ -22,8 +22,8 @@ use libc::{__s32, __u16, __u32, __u64, c_char, c_int, c_long, c_uint};
 #[derive(Clone, Copy, Debug)]
 pub struct statx_timestamp {
     pub tv_sec: i64,
-    pub tc_nsec: __u32,
-    pub __reserved: __s32,
+    pub tv_nsec: u32,
+    pub __reserved: i32,
 }
 
 /// Structures for the extended file attribute retrieval system call
@@ -66,32 +66,32 @@ pub struct statx_timestamp {
 pub struct statx {
     // 0x00
     /// What results were written [uncond]
-    pub stx_mask: __u32,
+    pub stx_mask: u32,
     /// Preferred general I/O size [uncond]
-    pub stx_blksize: __u32,
+    pub stx_blksize: u32,
     /// Flags conveying information about the file [uncond]
-    pub stx_attributes: __u64,
+    pub stx_attributes: u64,
 
     // 0x10
     /// Number of hard links
-    pub stx_nlink: __u32,
+    pub stx_nlink: u32,
     /// User ID of owner
-    pub stx_uid: __u32,
+    pub stx_uid: u32,
     /// Group ID of owner
-    pub stx_gid: __u32,
+    pub stx_gid: u32,
     /// File mode
-    pub stx_mode: __u16,
-    pub __spare0: [__u16; 1],
+    pub stx_mode: u16,
+    pub __spare0: [u16; 1],
 
     // 0x20
     /// Inode number
-    pub stx_ino: __u64,
+    pub stx_ino: u64,
     /// File size
-    pub stx_size: __u64,
+    pub stx_size: u64,
     /// Number of 512-byte blocks allocated
-    pub stx_blocks: __u64,
+    pub stx_blocks: u64,
     /// Mask to show what's supported in stx_attributes
-    pub stx_attributes_mask: __u64,
+    pub stx_attributes_mask: u64,
 
     // 0x40
     pub stx_atime: statx_timestamp, /* Last access time */
@@ -101,15 +101,15 @@ pub struct statx {
 
     /* 0x80 */
     /// Device ID of special file [if bdev/cdev]
-    pub stx_rdev_major: __u32,
-    pub stx_rdev_minor: __u32,
+    pub stx_rdev_major: u32,
+    pub stx_rdev_minor: u32,
     /// ID of device containing file [uncond]
-    pub stx_dev_major: __u32,
-    pub stx_dev_minor: __u32,
+    pub stx_dev_major: u32,
+    pub stx_dev_minor: u32,
 
     // 0x90
     /// Spare space for future expansion
-    pub __spare2: [__u64; 14],
+    pub __spare2: [u64; 14],
     // 0x100
 }
 
@@ -140,13 +140,13 @@ pub const STATX__RESERVED: c_uint = 0x8000_0000;
 
 // File attributes.
 
-pub const STATX_ATTR_COMPRESSED: __u64 = 0x0000_0004;
-pub const STATX_ATTR_IMMUTABLE: __u64 = 0x0000_0010;
-pub const STATX_ATTR_APPEND: __u64 = 0x0000_0020;
-pub const STATX_ATTR_NODUMP: __u64 = 0x0000_0040;
-pub const STATX_ATTR_ENCRYPTED: __u64 = 0x0000_0800;
+pub const STATX_ATTR_COMPRESSED: c_int = 0x0000_0004;
+pub const STATX_ATTR_IMMUTABLE: c_int = 0x0000_0010;
+pub const STATX_ATTR_APPEND: c_int = 0x0000_0020;
+pub const STATX_ATTR_NODUMP: c_int = 0x0000_0040;
+pub const STATX_ATTR_ENCRYPTED: c_int = 0x0000_0800;
 
-pub const STATX_ATTR_AUTOMOUNT: __u64 = 0x0000_1000;
+pub const STATX_ATTR_AUTOMOUNT: c_int = 0x0000_1000;
 
 /// statx - get file status (extended)
 ///
