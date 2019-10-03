@@ -7,11 +7,11 @@ license = "MIT"
 categories = ["os::unix-apis", "external-ffi-bindings"]
 keywords = ["statx", "linux", "ffi", "system"]
 repository = "https://github.com/uHOOCCOOHu/statx-sys"
-description = "Bindings to `statx` syscall."
+description = "Bindings to `statx` syscall implemented by `syscall`"
 readme = "README.md"
 
 [dependencies]
-libc = { version = "^0.2.51", default-features = false }
+libc = { version = "0.2.3", default-features = false }
 
 [dev-dependencies]
-memoffset = "^0.5.1"
+memoffset = "0.5.1"

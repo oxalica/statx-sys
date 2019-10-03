@@ -8,7 +8,7 @@
 #![deny(warnings)]
 
 use libc::syscall;
-use libc::{c_char, c_long, c_int, c_uint};
+use libc::{c_char, c_int, c_long, c_uint};
 
 /// Timestamp structure for the timestamps in struct statx.
 ///
@@ -168,8 +168,8 @@ mod tests {
 
     #[test]
     fn check_struct_layout() {
-        use memoffset::offset_of;
         use core::mem::size_of;
+        use memoffset::offset_of;
 
         assert_eq!(size_of::<statx>(), 0x100);
         assert_eq!(size_of::<statx_timestamp>(), 16);

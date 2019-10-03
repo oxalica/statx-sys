@@ -4,9 +4,11 @@ use statx_sys::*;
 
 #[test]
 fn test_statx() {
-    use libc::{__errno_location, strerror, AT_FDCWD};
+    use libc::{__errno_location, c_int, strerror};
     use std::ffi::CStr;
     use std::mem::MaybeUninit;
+
+    const AT_FDCWD: c_int = -100; // Not contained in low version of libc
 
     // Working dir
     let c_path = b".\0";
