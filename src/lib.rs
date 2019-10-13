@@ -5,10 +5,11 @@
 //! # See also
 //! http://man7.org/linux/man-pages/man2/statx.2.html
 #![no_std]
+#![cfg(target_os = "linux")]
 #![deny(warnings)]
 
 use libc::syscall;
-use libc::{c_char, c_int, c_long, c_uint};
+use libc::{c_char, c_int, c_uint};
 
 /// Timestamp structure for the timestamps in struct statx.
 ///
@@ -113,8 +114,8 @@ pub struct statx {
     // 0x100
 }
 
-#[allow(non_upper_case_globals)]
-pub const SYS_statx: c_long = 332;
+mod syscall;
+pub use syscall::SYS_statx;
 
 // Flags
 pub const AT_FDCWD: c_int = -100;
