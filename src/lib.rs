@@ -117,10 +117,17 @@ pub struct statx {
 pub const SYS_statx: c_long = 332;
 
 // Flags
+pub const AT_FDCWD: c_int = -100;
+pub const AT_SYMLINK_NOFOLLOW: c_int = 0x100;
+pub const AT_REMOVEDIR: c_int = 0x200;
+pub const AT_SYMLINK_FOLLOW: c_int = 0x400;
+pub const AT_NO_AUTOMOUNT: c_int = 0x800;
+pub const AT_EMPTY_PATH: c_int = 0x1000;
 
-pub const AT_STATX_SYNC_AS_STAT: c_uint = 0x0000_0000;
-pub const AT_STATX_FORCE_SYNC: c_uint = 0x0000_2000;
-pub const AT_STATX_DONT_SYNC: c_uint = 0x0000_4000;
+pub const AT_STATX_SYNC_AS_STAT: c_int = 0x0000;
+pub const AT_STATX_FORCE_SYNC: c_int = 0x2000;
+pub const AT_STATX_SYNC_TYPE: c_int = 0x6000;
+pub const AT_STATX_DONT_SYNC: c_int = 0x4000;
 
 pub const STATX_TYPE: c_uint = 0x0000_0001;
 pub const STATX_MODE: c_uint = 0x0000_0002;
