@@ -23,7 +23,7 @@ use libc::{c_char, c_int, c_long, c_uint};
 pub struct statx_timestamp {
     pub tv_sec: i64,
     pub tv_nsec: u32,
-    pub __reserved: i32,
+    __reserved: i32,
 }
 
 /// Structures for the extended file attribute retrieval system call
@@ -81,7 +81,7 @@ pub struct statx {
     pub stx_gid: u32,
     /// File mode
     pub stx_mode: u16,
-    pub __spare0: [u16; 1],
+    __spare0: [u16; 1],
 
     // 0x20
     /// Inode number
@@ -109,7 +109,7 @@ pub struct statx {
 
     // 0x90
     /// Spare space for future expansion
-    pub __spare2: [u64; 14],
+    __spare2: [u64; 14],
     // 0x100
 }
 
