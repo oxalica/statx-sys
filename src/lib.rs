@@ -66,11 +66,11 @@ pub struct statx_timestamp {
 #[derive(Clone, Copy, Debug)]
 pub struct statx {
     // 0x00
-    /// What results were written [uncond]
+    /// What results were written \[uncond]
     pub stx_mask: u32,
-    /// Preferred general I/O size [uncond]
+    /// Preferred general I/O size \[uncond]
     pub stx_blksize: u32,
-    /// Flags conveying information about the file [uncond]
+    /// Flags conveying information about the file \[uncond]
     pub stx_attributes: u64,
 
     // 0x10
@@ -101,10 +101,10 @@ pub struct statx {
     pub stx_mtime: statx_timestamp, /* Last data modification time */
 
     /* 0x80 */
-    /// Device ID of special file [if bdev/cdev]
+    /// Device ID of special file \[if bdev/cdev]
     pub stx_rdev_major: u32,
     pub stx_rdev_minor: u32,
-    /// ID of device containing file [uncond]
+    /// ID of device containing file \[uncond]
     pub stx_dev_major: u32,
     pub stx_dev_minor: u32,
 
