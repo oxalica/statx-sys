@@ -1,12 +1,12 @@
 [package]
 name = "statx-sys"
 version = "0.4.0"
-authors = ["uHOOCCOOHu <hooccooh1896@gmail.com>"]
+authors = ["oxalica <oxalicc@pm.me>"]
 edition = "2018"
 license = "MIT"
 categories = ["os::unix-apis", "external-ffi-bindings"]
 keywords = ["statx", "linux", "ffi", "system"]
-repository = "https://github.com/uHOOCCOOHu/statx-sys"
+repository = "https://github.com/oxalica/statx-sys"
 description = "Bindings to `statx` syscall implemented by `syscall`"
 readme = "README.md"
 
