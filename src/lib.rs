@@ -3,7 +3,7 @@
 //! Note that `statx()` was added to Linux in kernel 4.11 .
 //!
 //! # See also
-//! http://man7.org/linux/man-pages/man2/statx.2.html
+//! <http://man7.org/linux/man-pages/man2/statx.2.html>
 #![no_std]
 #![cfg(target_os = "linux")]
 #![deny(warnings)]
@@ -159,7 +159,7 @@ pub const STATX_ATTR_AUTOMOUNT: c_int = 0x0000_1000;
 /// statx - get file status (extended)
 ///
 /// See also:
-/// http://man7.org/linux/man-pages/man2/statx.2.html
+/// <http://man7.org/linux/man-pages/man2/statx.2.html>
 pub unsafe fn statx(
     dirfd: c_int,
     pathname: *const c_char,
