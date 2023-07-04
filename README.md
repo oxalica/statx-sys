@@ -1,5 +1,8 @@
 # statx-sys
 
+**This project is archived. Please use `libc` directly, or `rustix` for
+non-libc targets.**
+
 Bindings to `statx` syscall which is available in Linux kernel 4.11 ,
 implemented by `syscall` syscall.
 
